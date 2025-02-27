@@ -1,31 +1,13 @@
 ﻿@model WeatherMeasurement
 
 <h2>Vejr i @Model.Name</h2>
-@try {
 
-    @if (Model.Weather != null)
-    {
-        <p>Temperatur: @Model.Main.Temp °C</p>
-        <p>Føles som: @Model.Main.Feels_Like °C</p>
-        <p>Fugtighed: @Model.Main.Humidity%</p>
-        <p>Beskrivelse: @Model.Weather[0].Description</p>
-    
-    }
-}
-catch (NullReferenceException e)
+@if (Model.Weather != null)
 {
-    <input id="lat" type="number" min="-90" max="90" />
-    <input id="lon" type="number" min="-90" max="90" />
-
-    <a id="go">GO</a>
-
-    <script>
-        document.getElementById("go").addEventListener("click") = function(e) 
-        {
-            var lat = document.getElementById("lat").value;
-            var lon = document.getElementById("lon").value;
-
-            navigate(window.location.pathname + "?lat=" + lat + "&lon" + lon);
-        }
-    </script>
+    <p>Temperatur: @Model.Main.Temp °C</p>
+    <p>Føles som: @Model.Main.Feels_Like °C</p>
+    <p>Fugtighed: @Model.Main.Humidity%</p>
+    <p>Beskrivelse: @Model.Weather[0].Description</p>
+    
 }
+

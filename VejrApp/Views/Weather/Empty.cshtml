@@ -3,3 +3,28 @@
 *@
 @{
 }
+
+
+<script>
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition((position) => {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            
+            window.location.href = "?lat="+lat+"&lon="+lon;
+        }); 
+    }
+
+
+    function handle(e) {
+        var lat = document.getElementById("lat").value;
+        var lon = document.getElementById("lon").value;
+        console.log(lat);
+        console.log(lon);
+    }
+</script>
+
+<input id="lat" type="number" min="-90" max="90" />
+<input id="lon" type="number" min="-90" max="90" />
+
+<a id="go" onmousedown="handle(event)">GO</a>

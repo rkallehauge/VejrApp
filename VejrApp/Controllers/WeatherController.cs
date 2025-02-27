@@ -12,11 +12,10 @@ namespace VejrApp.Controllers
         {
             APIHandler Client = new();
 
-            WeatherMeasurement hole = new();
 
             if(lon==0 && lat == 0)
             {
-                return View(hole);
+                return Empty();
             }
 
             try
@@ -35,8 +34,13 @@ namespace VejrApp.Controllers
             
             catch (HttpRequestException ex)
             {
-                return View(hole);
+                return Empty();
             }
+        }
+
+        public IActionResult Empty()
+        {
+            return View("Empty");
         }
     }
 }

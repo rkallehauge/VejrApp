@@ -29,7 +29,7 @@ namespace VejrApp.Models
             Query["lon"] = lon.ToString();
             Query["appid"] = apiKey;
             Builder.Query = Query.ToString();
-            
+
             var response = await Client.GetAsync(Builder.Uri);
             return response;
 
