@@ -2,6 +2,7 @@
 using VejrApp.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace VejrApp.Controllers
 {
@@ -10,6 +11,13 @@ namespace VejrApp.Controllers
         public async Task<IActionResult> Index(double lon, double lat)
         {
             APIHandler Client = new();
+
+            WeatherMeasurement hole = new();
+
+            if(lon==0 && lat == 0)
+            {
+                return View(hole);
+            }
 
             try
             {
@@ -27,7 +35,7 @@ namespace VejrApp.Controllers
             
             catch (HttpRequestException ex)
             {
-                return View();
+                return View(hole);
             }
         }
     }
