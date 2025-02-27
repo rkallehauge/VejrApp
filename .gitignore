@@ -399,4 +399,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-VejrApp/Models/StaticSecret.cs
+*/StaticSecret.cs
