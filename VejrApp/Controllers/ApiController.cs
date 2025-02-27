@@ -7,6 +7,7 @@ namespace VejrApp.Controllers
     {
         public IActionResult Index()
         {
+            APIHandler Client = new ();
             return View();
         }
     }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Web;
+using System.Diagnostics;
 
 namespace VejrApp.Models
 {
@@ -16,11 +18,27 @@ namespace VejrApp.Models
             Client.BaseAddress = API;                                               //Når der kommer forspørgelser, så peger den her hen
         }
 
-        public async HttpResponseMessage Get(double lon, double lat)            //
+        public HttpResponseMessage Get(double lon, double lat)            //Henter en Http-respons med API med brede og længdegrad
         {
             string apiKey = Models.StaticSecret.Secret;
-        }
+
+            UriBuilder Builder = new(Client.BaseAddress);
+
+            var Query = HttpUtility.ParseQueryString(Builder.Query);
+            Query["lat"] = lat.ToString();
+            Query["lon"] = lon.ToString();
+            Query["appid"] = apiKey;
+            Builder.Query = Query.ToString();
             
+
+            
+
+
+        }
+
+        
+
+
     }
 
 
