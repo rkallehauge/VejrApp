@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VejrApp.Models;
 
 namespace VejrApp.Controllers
 {
@@ -6,6 +7,7 @@ namespace VejrApp.Controllers
     {
         public IActionResult Index()
         {
+            APIHandler Client = new();
             return View();
         }
     }

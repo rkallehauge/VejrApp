@@ -18,7 +18,7 @@ namespace VejrApp.Models
             Client.BaseAddress = API;                                               //Når der kommer forspørgelser, så peger den her hen
         }
 
-        public HttpResponseMessage Get(double lon, double lat)            //Henter en Http-respons med API med brede og længdegrad
+        public async Task <HttpResponseMessage> Get(double lon, double lat)            //Henter en Http-respons med API med brede og længdegrad
         {
             string apiKey = Models.StaticSecret.Secret;
 
@@ -30,8 +30,9 @@ namespace VejrApp.Models
             Query["appid"] = apiKey;
             Builder.Query = Query.ToString();
             
+            var response = await Client.GetAsync(Builder.Uri);
+            return response;
 
-            
 
 
         }
