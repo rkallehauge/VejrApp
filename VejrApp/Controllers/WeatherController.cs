@@ -2,22 +2,30 @@
 using VejrApp.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace VejrApp.Controllers
 {
     public class WeatherController : Controller
     {
-        public IActionResult Index(double lon, double lat)
+        public async Task<IActionResult> Index(double lon, double lat)
         {
             APIHandler Client = new();
 
+            WeatherMeasurement hole = new();
+
+            if(lon==0 && lat == 0)
+            {
+                return View(hole);
+            }
+
             try
             {
-                var Response = Client.Get(lon, lat);
+                var Response = await Client.Get(lon, lat);
 
-                Response.EnsureSuccessStatusCode();
+                //Response.EnsureSuccessStatusCode();
 
-                string JsonData = Response.Content.ReadAsString();
+                string JsonData = await Response.Content.ReadAsStringAsync();
 
                 WeatherMeasurement measurement = JsonConvert.DeserializeObject<WeatherMeasurement>(JsonData);
 
@@ -27,7 +35,7 @@ namespace VejrApp.Controllers
             
             catch (HttpRequestException ex)
             {
-
+                return View(hole);
             }
         }
     }
